@@ -1,0 +1,114 @@
+﻿@page
+@model Books_Spot.Pages.Books.IndexModel
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h1>Books</h1>
+<h4>Search</h4>
+
+<p>
+    @if (User.IsInRole("Administrator"))
+    {
+        <a asp-page="Create">Create New</a>
+    }
+</p>
+<div class="col-md-4">
+<form>
+    
+        Book Title: <input type="text" asp-for="BookTitle" class="form-control"/>
+        Author: <input type="text" asp-for="Author" class="form-control"/>
+        Publisher: <input type="text" asp-for="Publisher" class="form-control"/>
+
+        Publishing year: <input type="text" asp-for="PublishingDate" class="form-control"/>
+        ISBN code: <input type="text" asp-for="ISBNCode" class="form-control"/>
+        Genre:
+        <select asp-for="BookGenre" asp-items="Model.Genres">
+            <option value=""></option>
+        </select>
+        Book Status:
+        <select asp-for="BookStatus" asp-items="Model.BookStatuses">
+            <option value=""></option>
+        </select>
+    <input type="submit" value="Filter" />
+    
+</form>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].BookTitle)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Author)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Publisher)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].PublishingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].Genre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].ISBNCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Book[0].BookStatus)
+            </th>
+            <th>
+                @if (User.IsInRole("Administrator"))
+                {
+                    @Html.DisplayNameFor(model => model.Book[0].ReservedBy)
+                }
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Book) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookTitle)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PublishingDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Genre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ISBNCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.BookStatus)
+            </td>
+            <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        @Html.DisplayFor(modelItem => item.ReservedBy)
+
+                    }
+                </td>
+                <td>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-page="./Edit" asp-route-id="@item.ID">Edit |</a>
+                        <a asp-page="./Delete" asp-route-id="@item.ID">Delete |</a>
+                        <button id="update" type="submit" class="btn btn-primary" style="display: none">Update Data</button>
+                    }
+                        <a asp-page="./Details" asp-route-id="@item.ID">Details</a>
+                </td>
+        </tr>
+}
+    </tbody>
+</table>

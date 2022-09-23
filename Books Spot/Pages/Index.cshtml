@@ -1,0 +1,23 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+
+<h1 class="text-center  font bold">Welcome to Books Spot</h1>
+<h2 class="text-center  font bold">The spot for books and You</h2>
+
+<p class="lh-base"> Books Spot is a library with loads of interesting books of various genres.  </p>
+
+<p class="lh-base"> Here you can reserve, borrow and return books.  </p>
+
+<p> Feeling interested? Give it a go.</p>
+
+<p> You can check All the books by <a asp-area="" asp-page="/Books/Index" >clicking here.</a></p>
+
+<p> If you would like to reserve and borrow one, please register an account <a asp-area="Identity" asp-page="/Account/Register"> here</a> or log in <a asp-area="Identity" asp-page="/Account/Login"> here</a>.</p>
+
+<p> Then, once you found the book you'd like to read, click "Details" in order to proceed with your reservation.</p>
+
+<p> Books Spot team wishes you happy reading.</p>
